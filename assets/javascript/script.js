@@ -1,10 +1,9 @@
-var zipCode = '60630';
 var countryCode = 'US'
 
-var apiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
-var url = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${apiKey}`;
+var weatherApiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
 
-var searchBtn = $('#searchButton');
+var zipSearchTxt = $('#zipSearchInputField')
+var searchBtn = $('#zipSearchBtn');
 
 var weather = {
     city: "",
@@ -17,7 +16,18 @@ var weather = {
 
 function getWeatherData() {
 
-    fetch(url)
+    var zipCode = zipSearchTxt.val();
+    var weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${weatherApiKey}`;
+
+
+    if (isNaN(parseInt(zipCode))) {
+        // invalid zip
+        console.log("Invalid Entry");
+        zipSearchTxt.val('');
+        return;
+    }
+
+    fetch(weatherApiUrl)
         .then(function(response) {
             return response.json();
         })
@@ -32,8 +42,15 @@ function getWeatherData() {
             weather.currentConditions = data.weather[0].main;
 
             console.log(weather);
-            updateCityWeatherCard();
 
+            zipSearchTxt.val('');
+
+            //updateCityWeatherCard(); see info inside function
+
+        }).catch(function() {
+            console.log("city does not exist");
+            zipSearchTxt.val('');
+            return;
         });
 
 }
@@ -46,6 +63,7 @@ function convertKelvin(temp) {
 
 function updateCityWeatherCard() {
 
+    // needs updating to build the weather card.
     $('#city-data').empty();
 
     $('#city-data').append(`<li>${weather.city}</li>` +
