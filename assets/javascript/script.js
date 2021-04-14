@@ -11,6 +11,10 @@ var weather = {
     img: "",
     imgDesc: "",
     temp: "",
+    tempHigh: "",
+    tempLow:"",
+    windSpeed:"",
+    windDirection:"",
     humidity: "",
     currentConditions: ""
 }
@@ -41,12 +45,16 @@ function getWeatherData() {
             weather.img = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
             weather.imgDesc = data.weather[0].description;
             weather.currentConditions = data.weather[0].main;
+            weather.tempHigh = convertKelvin(data.main.temp_max);
+            weather.tempLow = convertKelvin(data.main.temp_min);
+            weather.windSpeed = convertKPHtoMPH(data.wind.speed);
+            weather.windDirection = degreeToCompassDirection(data.wind.deg);
 
             console.log(weather);
 
             zipSearchTxt.val('');
 
-            //updateCityWeatherCard(); see info inside function
+            updateCityWeatherCard();
 
         }).catch(function() {
             console.log("city does not exist");
@@ -62,18 +70,31 @@ function convertKelvin(temp) {
     return Math.floor((temp - 273.15) * (9/5) + 32);
 }
 
-function updateCityWeatherCard() {
-
-    // needs updating to build the weather card.
-    $('#city-data').empty();
-
-    $('#city-data').append(`<li>${weather.city}</li>` +
-                           `<li><img src="${weather.img}" alt="${weather.imgDesc}"></li>` +
-                           `<li>${weather.currentConditions}</li>` +
-                           `<li>Temp: ${weather.temp} &#730F</li>` +
-                           `<li>Humidity: ${weather.humidity}%</li>`);
-
+function convertKPHtoMPH(kph) {
+    return Math.floor(kph/1.609344);
 }
+
+function degreeToCompassDirection(deg) {
+    if(deg > 338 || deg <= 22) {
+        return 'N';
+    } else if (deg > 22 && deg <= 68) {
+        return 'NE';
+    } else if (deg > 68 && deg <= 113) {
+        return 'E';
+    } else if (deg > 113 && deg <= 158) {
+        return 'SE';
+    } else if (deg > 158 && deg <= 203) {
+        return 'S';
+    } else if (deg > 203 && deg <= 248) {
+        return 'SW';
+    } else if (deg > 248 && deg <= 293) {
+        return 'W';
+    } else {
+        return 'NW';
+    }
+}
+
+
 
 var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
 'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
@@ -124,3 +145,21 @@ for (var i = 0; i < oraleURL.length; i++) {
         console.log(data)
     }) 
 } 
+
+function updateCityWeatherCard() {
+    $('#weather-card').empty();
+
+    $('#weather-card').append(`<div class="card-content"><div class="media"><div class="media-left">` +
+                              `<figure class="image is-48x48"><img src="${weather.img}" alt="${weather.imgDesc}"></figure></div>` +
+                              `<div class="media-content"><p class="title is-4">${weather.city}</p>` +
+                              `<p class="subtitle is-6">${weather.currentConditions}</p></div></div>` +
+                              `<div class="content"><p>Temp: ${weather.temp} &#730F</p>` +
+                              `<p>High: ${weather.tempHigh} &#730F</p>` +
+                              `<p>Low: ${weather.tempLow} &#730F</p>` +
+                              `<p>Humidity: ${weather.humidity}%</p>` +
+                              `<p>Winds: ${weather.windSpeed}mph ${weather.windDirection}</p></div></div>`);
+
+}
+    // needs updating to build the weather card.
+   
+//}
