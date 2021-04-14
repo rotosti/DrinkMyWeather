@@ -1,3 +1,4 @@
+
 var countryCode = 'US'
 
 var weatherApiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
@@ -93,9 +94,59 @@ function degreeToCompassDirection(deg) {
     }
 }
 
-function updateCityWeatherCard() {
 
-    // needs updating to build the weather card.
+
+var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
+'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
+
+function getRandomNeat() {
+    return neat[Math.floor(Math.random() * neat.length)]; 
+} 
+
+console.log(getRandomNeat())
+
+
+var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=whiskey'];
+
+for (var i = 0; i < proURL.length; i++) {
+    fetch(proURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
+
+
+var clearURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=gin',
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=vodka'];
+
+for (var i = 0; i < clearURL.length; i++) {
+    fetch(clearURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
+
+var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequila',
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum'];
+
+for (var i = 0; i < oraleURL.length; i++) {
+    fetch(oraleURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
+
+function updateCityWeatherCard() {
     $('#weather-card').empty();
 
     $('#weather-card').append(`<div class="card-content"><div class="media"><div class="media-left">` +
@@ -109,3 +160,6 @@ function updateCityWeatherCard() {
                               `<p>Winds: ${weather.windSpeed}mph ${weather.windDirection}</p></div></div>`);
 
 }
+    // needs updating to build the weather card.
+   
+//}
