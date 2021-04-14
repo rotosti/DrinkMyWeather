@@ -1,23 +1,4 @@
-// var drinkRecommend = document.getElementById('')
-var neat = ['Siembra Valles 92 proof Blanco Tequila', 'Hakushu 18-Year Whiskey', 'NY Distilling Ragtime Rye', 'Malort', 'Del Maguey Mezcal', 'calvados'];
-var availableBank = [];
 
-
-fetch('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon')
-    .then(function(response) {
-        return response.json();
-    })
-    .then(function(data) {
-        console.log(data);
-    })
-
-    $("p").on("click", function(){
-        alert("The paragraph was clicked.");
-      }); 
-
-    // if(50degrees ==true ){
-    //     availableBank = availableBank.concat(neat)
-    // }
 var countryCode = 'US'
 
 var weatherApiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
@@ -93,3 +74,53 @@ function updateCityWeatherCard() {
                            `<li>Humidity: ${weather.humidity}%</li>`);
 
 }
+
+var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
+'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
+
+function getRandomNeat() {
+    return neat[Math.floor(Math.random() * neat.length)]; 
+} 
+
+console.log(getRandomNeat())
+
+
+var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=whiskey'];
+
+for (var i = 0; i < proURL.length; i++) {
+    fetch(proURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
+
+
+var clearURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=gin',
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=vodka'];
+
+for (var i = 0; i < clearURL.length; i++) {
+    fetch(clearURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
+
+var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequila',
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum'];
+
+for (var i = 0; i < oraleURL.length; i++) {
+    fetch(oraleURL[i])
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(data){
+        console.log(data)
+    }) 
+} 
