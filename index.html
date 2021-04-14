@@ -7,43 +7,152 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+    <title>Drink My Weather</title>
 </head>
 <body>
-    <h1> Change</h1>
-
-
-    <container> 
         <section class="hero is-small is-success">
             <div class="hero-body">
               <p class="title">
                 Drink My Weather
               </p>
               <p class="subtitle">
-                Hero subtitle
+                Not Just For Plants...
               </p>
+              <div class="column is-offset-8">
+                  <p>Subscribe For a Weekly Special:<input class="input is-normal" type="email" placeholder="Drink Responsibly, Enter Email"></p><button class="button is-warning">Submit</button>
+              </div>
             </div>
           </section>
-        </container>
-    
+        <section>
         <div class="columns">
             <div class="column is-narrow is-one-third">
-              <div class="box" style="width: 250px;">
+              <div class="box" style="width: 300px;">
                 <br>
                 <p class="title is-5">Search By Zipcode</p>
-                <p class="subtitle"><input class="input is-info" type="text" placeholder="Info input"></p><div class="buttons">
-                    <button class="button is-info">submit</button>
-              </div>
+                <p class="subtitle"><input class="input is-info" id="zipSearchInputField" type="text" maxlength="5" 
+                    value="" required title="Requires 5 digit US ZIP code." placeholder="Zip code.." pattern = "[0-9]{5,5}"></p>
+                <div class="buttons">
+                    <button id="zipSearchBtn" type="submit" class="button is-info">submit</button> 
+                    <!-- should 'submit button' be inside the column div? creates shorter container -->
+                </div>
             </div>
-            <div class="column">
-              <div class="column is-two-thirds">
-                <p class="title is-5">Our Awesome Recommendations...</p>
-                <p class="subtitle">This column will take up the remaining space available.</p>
-              </div>
+            <!-- map container to be filled -->
+            <div class="columns">
+                <div class="column is-narrow is-one-third">
+                    <div style="width: 300px;">
+                        <div class="card">
+                            <div class="card-image">
+                              <figure class="image is-4by3">
+                                <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                              </figure>
+                            </div>
+                            <div class="card-content">
+                              <div class="media">
+                                <div class="media-left">
+                                  <figure class="image is-48x48">
+                                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                  </figure>
+                                </div>
+                                <div class="media-content">
+                                  <p class="title is-4">John Smith</p>
+                                  <p class="subtitle is-6">@johnsmith</p>
+                                </div>
+                              </div>
+                          
+                              <div class="content">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Phasellus nec iaculis mauris. <a>@bulmaio</a>.
+                                <a href="#">#css</a> <a href="#">#responsive</a>
+                                <br>
+                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                              </div>
+                            </div>
+                          </div>
+                    </div>   
+                </div>
             </div>
-          </div>
-    <h1> Site coming soon!!</h1>
-    
+        </div>
+        <!-- modify to match wireframe -->
+        <div class="column is-two-thirds">
+            <div class="columns is-centered is-full">
+                <div class="column">
+                    <div class="section is-medium">
+                        <p class="title">Our Awesome Recommendations...</p>
+                        <p class="subtitle">This column will take up the remaining space available.</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <!-- IMG  -->
+            <div class="columns is-full">
+                <div class="column is-3">
+                    <div class="card-image">
+                        <figure class="image is-2by2">
+                          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
+                            <div class="content">
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Tempore obcaecati totam, aut in volu ssumenda recanditiis, 
+                                    natus rem nam corporis rerum facere distinctio officiis.
+                                </p>
+                                <h2>Whisky Sour</h2>
+                                <h6>Mix Ingredients</h6>
+                                <ol type="i">
+                                    <li>Limes</li>
+                                    <li>Orange Peel</li>
+                                    <li>Whisky</li>
+                                    <li>Milk</li>
+                                    <li>ice tea</li>
+                                </ol>
+
+                            </div>
+                        </figure>    
+                    </div>    
+                </div>
+                <div class="column is-3">
+                    <div class="card-image">
+                        <figure class="image is-2by2">
+                          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
+                            <div class="content">
+                            <p>Lorem ipsum dolor sit amet elit.Tempore obcaecati totam, recanditiis.</p>
+                            <h2>Old Fashion'd </h2>
+                            <h6>Mix Ingredients</h6>
+                            <ol type="1">
+                                <li>Coffee</li>
+                                <li>Tea</li>
+                                <li>Vermouth</li>
+                                <li>Absinthe</li>
+                            </ol>
+
+                            </div>
+                        </figure>    
+                    </div>
+                </div>
+                <div class="column is-3">
+                    <div class="card-image">
+                        <figure class="image is-2by2">
+                          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
+                            <div class="content">
+                                <p>Lorem ipsum dolor sit amet elit.</p>
+                                <h2>Żubrówka</h2>
+                                <h6>Mix Ingredients</h6>
+                                <ol type="I">
+                                    <li>Vodka</li>
+                                    <li>Agave extract</li>
+                                    <li>ripe beets</li>
+                                </ol>
+
+                            </div>
+                        </figure>    
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>  
+
+ 
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="./assets/javascript/script.js"></script>
 </body>
