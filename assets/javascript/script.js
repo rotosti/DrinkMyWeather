@@ -1,11 +1,11 @@
-
+// Tom code - country code for search
 var countryCode = 'US'
-
+// weather API key
 var weatherApiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
-
+// search field and submit button
 var zipSearchTxt = $('#zipSearchInputField')
 var searchBtn = $('#zipSearchBtn');
-
+// weather data object
 var weather = {
     city: "",
     img: "",
@@ -21,6 +21,7 @@ var weather = {
 
 var displayDrinks = [];
 
+// function which generates the weather data from the API
 function getWeatherData() {
 
     var zipCode = zipSearchTxt.val();
@@ -96,8 +97,90 @@ function degreeToCompassDirection(deg) {
     }
 }
 
+function updateCityWeatherCard() {
+    
+    $('#weather-card').empty();
+
+    $('#weather-card').append(`<div class="card-content"><div class="media"><div class="media-left">` +
+                              `<figure class="image is-48x48"><img src="${weather.img}" alt="${weather.imgDesc}"></figure></div>` +
+                              `<div class="media-content"><p class="title is-4">${weather.city}</p>` +
+                              `<p class="subtitle is-6">${weather.currentConditions}</p></div></div>` +
+                              `<div class="content"><p>Temp: ${weather.temp} &#730F</p>` +
+                              `<p>High: ${weather.tempHigh} &#730F</p>` +
+                              `<p>Low: ${weather.tempLow} &#730F</p>` +
+                              `<p>Humidity: ${weather.humidity}%</p>` +
+                              `<p>Winds: ${weather.windSpeed}mph ${weather.windDirection}</p></div></div>`);
+
+}
+
+var drinks = [{
+        drinkID:'',
+        drinkName:'',
+        drinkImg:'',
+        drinkIngredients:[],
+        drinkMeasurements:[],
+        drinkInstruction:''
+        }, {
+        drinkID:'',
+        drinkName:'',
+        drinkImg:'',
+        drinkIngredients:[],
+        drinkMeasurements:[],
+        drinkInstruction:''
+        }, {
+        drinkID:'',
+        drinkName:'',
+        drinkImg:'',
+        drinkIngredients:[],
+        drinkMeasurements:[],
+        drinkInstruction:''
+        }]
 
 
+function getDrinkData() {
+
+    var drinkApiUrl = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=11007';
+
+    fetch(drinkApiUrl)
+        .then(function(serverResponse) {
+            return serverResponse.json();
+        })
+        .then(function(drinkData) {
+            console.log(drinkData);
+
+            drink.drinkID = drinkData.drinks[0].idDrink;
+            drink.drinkName = drinkData.drinks[0].strDrink;
+            drink.drinkImg = drinkData.drinks[0].strImageSource;
+            drink.drinkInstruction = drinkData.drinks[0].strInstructions;
+
+            const INGREDIENT_STRING = 'strIngredient';
+            const MEASURE_STRING = 'strMeasure'
+            
+            for (var i = 1; i <= 15; i++) {
+                var ingTemp = INGREDIENT_STRING;
+                var measTemp = MEASURE_STRING;
+                ingTemp+=i;
+                measTemp+=i;
+                if (drinkData.drinks[0][ingTemp] !== null) {
+                    drink.drinkIngredients.push(drinkData.drinks[0][ingTemp]);
+                }
+                if (drinkData.drinks[0][measTemp] !== null) {
+                    drink.drinkMeasurements.push(drinkData.drinks[0][measTemp])
+                }
+            }
+
+            if (drink.drinkIngredients.length != drink.drinkMeasurements.length) {
+                var difference = drink.drinkIngredients.length - drink.drinkMeasurements.length;
+                for (var j = 0; j < difference; j++) {
+                    drink.drinkMeasurements.push('');
+                }
+            }
+
+            console.log(drink);
+        })
+}
+
+// start jj code
 var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
 'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
 
@@ -149,20 +232,3 @@ for (var i = 0; i < oraleURL.length; i++) {
     }) 
 } 
 
-function updateCityWeatherCard() {
-    $('#weather-card').empty();
-
-    $('#weather-card').append(`<div class="card-content"><div class="media"><div class="media-left">` +
-                              `<figure class="image is-48x48"><img src="${weather.img}" alt="${weather.imgDesc}"></figure></div>` +
-                              `<div class="media-content"><p class="title is-4">${weather.city}</p>` +
-                              `<p class="subtitle is-6">${weather.currentConditions}</p></div></div>` +
-                              `<div class="content"><p>Temp: ${weather.temp} &#730F</p>` +
-                              `<p>High: ${weather.tempHigh} &#730F</p>` +
-                              `<p>Low: ${weather.tempLow} &#730F</p>` +
-                              `<p>Humidity: ${weather.humidity}%</p>` +
-                              `<p>Winds: ${weather.windSpeed}mph ${weather.windDirection}</p></div></div>`);
-
-}
-    // needs updating to build the weather card.
-   
-//}
