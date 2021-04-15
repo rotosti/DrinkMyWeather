@@ -1,4 +1,4 @@
-// Tom code - country code for search
+// country code for search
 var countryCode = 'US'
 // weather API key
 var weatherApiKey = 'a6bf4e0e3ad10827dd4efb76de3ab5e4';
@@ -18,8 +18,6 @@ var weather = {
     humidity: "",
     currentConditions: ""
 }
-
-var displayDrinks = [];
 
 // function which generates the weather data from the API
 function getWeatherData() {
@@ -164,124 +162,121 @@ function getRandomDrink(link) {
     })
 }
 
+// function call to get drink data into drink data object 
 function getDrinkData() {
-
+    // loop to make 3 api calls based on random drink id's
     for (let d = 0; d < 3; d++) {
-
+        // drink api url which gets modified per loop iteration
         var drinkApiUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkIDSelections[d]}`;
-
+        // fetch to get data
         fetch(drinkApiUrl)
             .then(function(serverResponse) {
                 return serverResponse.json();
             })
             .then(function(drinkData) {
+                // index to access the drink data array of objects
                 var index = d;
-
+                // information gathering
                 ourDrinkData[index].drinkID = drinkData.drinks[0].idDrink;
                 ourDrinkData[index].drinkName = drinkData.drinks[0].strDrink;
                 ourDrinkData[index].drinkImg = drinkData.drinks[0].strDrinkThumb;
                 ourDrinkData[index].drinkInstruction = drinkData.drinks[0].strInstructions;
-
+                // consts to build a key to access data in json response
                 const INGREDIENT_STRING = 'strIngredient';
                 const MEASURE_STRING = 'strMeasure'
-                
+                // loop to gather ingredients and measurements from json response
                 for (var i = 1; i <= 15; i++) {
                     var ingTemp = INGREDIENT_STRING;
                     var measTemp = MEASURE_STRING;
+                    // concat of numbers to get keys in json format
                     ingTemp+=i;
                     measTemp+=i;
+                    // checks to see if the key has information to pull
                     if (drinkData.drinks[0][ingTemp] !== null) {
                         ourDrinkData[index].drinkIngredients.push(drinkData.drinks[0][ingTemp]);
                     }
+                    // checks to see if the key has information to pull
                     if (drinkData.drinks[0][measTemp] !== null) {
                         ourDrinkData[index].drinkMeasurements.push(drinkData.drinks[0][measTemp])
                     }
                 }
-
+                // makes the length of the ingredients and their measurements the same
                 if (ourDrinkData[index].drinkIngredients.length != ourDrinkData[index].drinkMeasurements.length) {
                     var difference = ourDrinkData[index].drinkIngredients.length - ourDrinkData[index].drinkMeasurements.length;
+                    // loop to put in blank strings for later processing with the difference between array lengths
                     for (var j = 0; j < difference; j++) {
                         ourDrinkData[index].drinkMeasurements.push('');
                     }
                 }
         });
     }
-    
-    setTimeout(updateDrinkCards, 500);
+    // allows for all promises to get resolved before updating the drinks on display
+    setTimeout(updateDrinkCards, 400);
 }
 
+// logic to display specific drinks
 function startDrinkGathering() {
     
-    if (weather.temp < 0) { 
-        console.log("i'm cold!")
+    if (weather.temp < 0) {
         getBrrr();
-    } else if (weather.temp <= 32) {
-        console.log("i'm below 32")
+    } else if (weather.temp <= 40) {
         getProhb();
-    } else if (weather.temp <= 68){
-        console.log("i'm below 68")
+    } else if (weather.temp <= 75){
         getClear();
-    } else if (weather.temp < 100 ) {
-        console.log("i'm below 100")
+    } else {
         getOrale();
     } 
 }
 
+// drinks for the cold weather
 function getBrrr(){
 var brrrURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=absinthe', 
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=everclear']
+
     var urlIndex = Math.floor(Math.random()* brrrURL.length); 
-    console.log(brrrURL[urlIndex])
     getRandomDrink(brrrURL[urlIndex]);
-
 }
-
+// prohibition weather drinks
 function getProhb() {
 var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=whiskey'];
 
     var urlIndex = Math.floor(Math.random()* proURL.length); 
-    console.log(proURL[urlIndex])
     getRandomDrink(proURL[urlIndex]);
 }
-
+// clear alcohol drinks
 function getClear() { 
 var clearURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=gin',
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=vodka'];
 
     var urlIndex = Math.floor(Math.random()* clearURL.length); 
-    console.log(clearURL[urlIndex])
-    getRandomDrink(clearURL[urlIndex]);
-    
+    getRandomDrink(clearURL[urlIndex]);    
 } 
-
-   
+// warm weather drinks
 function getOrale() {
 var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequila',
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum'];
 
     var urlIndex = Math.floor(Math.random()* oraleURL.length); 
-    console.log(oraleURL[urlIndex])
     getRandomDrink(oraleURL[urlIndex]);
 } 
 
+// function to update the drink cards for the users to see
 function updateDrinkCards() {
-
+    // heading display on call
     $('#recommendation-heading').append(`<p class="title" id="awesomeRec">Our Awesome Recommendations...</p>`);
-
+    // clears existing cards
     $("#drink-card-container").empty();
-
+    // loop to build cards using the drink data array
     for (let m = 0; m < 3; m++){
-        
+        // string used to build list items
         let ingList = "";
-
+        // loop to build the list above
         for (let q = 0; q < ourDrinkData[m].drinkIngredients.length; q++) {
-
-            if (ourDrinkData[m].drinkIngredients[q] !== '') {
-               ingList += `<li>${ourDrinkData[m].drinkMeasurements[q]} ${ourDrinkData[m].drinkIngredients[q]}</li>`; 
-            }
+            // string concat of list items for later use
+            ingList += `<li>${ourDrinkData[m].drinkMeasurements[q]} ${ourDrinkData[m].drinkIngredients[q]}</li>`; 
         }
-
+        // build the card for display to the user
         $("#drink-card-container").append(`<div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">` +
                                         `<div class="card-image box "><figure class="image is-2by2">`+
                                         `<img src="${ourDrinkData[m].drinkImg}"><div class="content">`+
