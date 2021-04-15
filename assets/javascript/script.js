@@ -171,49 +171,43 @@ function getDrinkData() {
         var drinkApiUrl = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkIDSelections[d]}`;
 
         fetch(drinkApiUrl)
-        .then(function(serverResponse) {
-            return serverResponse.json();
-        })
-        .then(function(drinkData) {
-            var index = d;
+            .then(function(serverResponse) {
+                return serverResponse.json();
+            })
+            .then(function(drinkData) {
+                var index = d;
 
-            ourDrinkData[index].drinkID = drinkData.drinks[0].idDrink;
-            ourDrinkData[index].drinkName = drinkData.drinks[0].strDrink;
-            ourDrinkData[index].drinkImg = drinkData.drinks[0].strDrinkThumb;
-            ourDrinkData[index].drinkInstruction = drinkData.drinks[0].strInstructions;
+                ourDrinkData[index].drinkID = drinkData.drinks[0].idDrink;
+                ourDrinkData[index].drinkName = drinkData.drinks[0].strDrink;
+                ourDrinkData[index].drinkImg = drinkData.drinks[0].strDrinkThumb;
+                ourDrinkData[index].drinkInstruction = drinkData.drinks[0].strInstructions;
 
-            const INGREDIENT_STRING = 'strIngredient';
-            const MEASURE_STRING = 'strMeasure'
-            
-            for (var i = 1; i <= 15; i++) {
-                var ingTemp = INGREDIENT_STRING;
-                var measTemp = MEASURE_STRING;
-                ingTemp+=i;
-                measTemp+=i;
-                if (drinkData.drinks[0][ingTemp] !== null) {
-                    ourDrinkData[index].drinkIngredients.push(drinkData.drinks[0][ingTemp]);
+                const INGREDIENT_STRING = 'strIngredient';
+                const MEASURE_STRING = 'strMeasure'
+                
+                for (var i = 1; i <= 15; i++) {
+                    var ingTemp = INGREDIENT_STRING;
+                    var measTemp = MEASURE_STRING;
+                    ingTemp+=i;
+                    measTemp+=i;
+                    if (drinkData.drinks[0][ingTemp] !== null) {
+                        ourDrinkData[index].drinkIngredients.push(drinkData.drinks[0][ingTemp]);
+                    }
+                    if (drinkData.drinks[0][measTemp] !== null) {
+                        ourDrinkData[index].drinkMeasurements.push(drinkData.drinks[0][measTemp])
+                    }
                 }
-                if (drinkData.drinks[0][measTemp] !== null) {
-                    ourDrinkData[index].drinkMeasurements.push(drinkData.drinks[0][measTemp])
+
+                if (ourDrinkData[index].drinkIngredients.length != ourDrinkData[index].drinkMeasurements.length) {
+                    var difference = ourDrinkData[index].drinkIngredients.length - ourDrinkData[index].drinkMeasurements.length;
+                    for (var j = 0; j < difference; j++) {
+                        ourDrinkData[index].drinkMeasurements.push('');
+                    }
                 }
-            }
-
-            if (ourDrinkData[index].drinkIngredients.length != ourDrinkData[index].drinkMeasurements.length) {
-                var difference = ourDrinkData[index].drinkIngredients.length - ourDrinkData[index].drinkMeasurements.length;
-                for (var j = 0; j < difference; j++) {
-                    ourDrinkData[index].drinkMeasurements.push('');
-                }
-            }
-
-            console.log(ourDrinkData);
-        })
-        
-    } 
-//    Promise.all(); 
-
-    console.log("i'm updating drink cards")
-   updateDrinkCards();
-   setTimeout(5000, updateDrinkCards)
+        });
+    }
+    
+    setTimeout(updateDrinkCards, 500);
 }
 
 function startDrinkGathering() {
@@ -272,53 +266,27 @@ var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequil
 } 
 
 function updateDrinkCards() {
-   $("#drink-card-container").empty();
-   
-    var ingList = "";
 
-    console.log(ourDrinkData) 
-    // for (let q = 0; q < ourDrinkData.drinkIngredients.length; q++){
-    //     ingList += `<li>${ourDrinkData.drinkMeasurements[q]}${ourDrinkData.drinkIngredients[q]}</li>`;
-    // }
+    $('#recommendation-heading').append(`<p class="title" id="awesomeRec">Our Awesome Recommendations...</p>`);
+
+    $("#drink-card-container").empty();
 
     for (let m = 0; m < 3; m++){
-        console.log("help me here", m, ourDrinkData[m].drinkName);
-        for (let q = 0; q < ourDrinkData[m].drinkIngredients.length; q++){
-            console.log("i'm in the second loop", m, ourDrinkData[m].drinkName);
-            ingList += `<li>${ourDrinkData[m].drinkMeasurements[q]}${ourDrinkData[m].drinkIngredients[q]}</li>`;
-            console.log(ingList, "after update of ing list");
+        
+        let ingList = "";
+
+        for (let q = 0; q < ourDrinkData[m].drinkIngredients.length; q++) {
+
+            if (ourDrinkData[m].drinkIngredients[q] !== '') {
+               ingList += `<li>${ourDrinkData[m].drinkMeasurements[q]} ${ourDrinkData[m].drinkIngredients[q]}</li>`; 
+            }
         }
+
         $("#drink-card-container").append(`<div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">` +
-                                          `<div class="card-image box "><figure class="image is-2by2">`+
-                                          `<img src="${ourDrinkData[m].drinkImg}"><div class="content">`+
-                                          `<h2>${ourDrinkData[m].drinkName}</h2><ol type="i">${ingList}</ol>`+
-                                          `<h6>How to make: </h6><p>${ourDrinkData[m].drinkInstruction}</p>`+ 
-                                          `</div></figure></div></div>`)
+                                        `<div class="card-image box "><figure class="image is-2by2">`+
+                                        `<img src="${ourDrinkData[m].drinkImg}"><div class="content">`+
+                                        `<h2>${ourDrinkData[m].drinkName}</h2><ol type="i">${ingList}</ol>`+
+                                        `<h6>How to make: </h6><p>${ourDrinkData[m].drinkInstruction}</p>`+ 
+                                        `</div></figure></div></div>`)
     }
 }
-
-
-
-
-
-
-
-
-/* <div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">
-<div class="card-image box ">
-    <figure class="image is-2by2">
-      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
-        <div class="content">
-                <h2> Drink Title </h2>
-            <ol type="i">
-                <li>Measure/Ingredients</li>
-                <li>Measure/Ingredients</li>
-                <li>Measure/Ingredients</li>
-                <li>Measure/Ingredients</li>
-            </ol>
-                <h6>Instructions</h6>
-                <p>Here is the Instructions for the Drink</p>
-        </div>
-    </figure>    
-</div>    
-</div> */
