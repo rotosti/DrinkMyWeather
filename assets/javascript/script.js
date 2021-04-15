@@ -264,6 +264,7 @@ var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequil
 // function to update the drink cards for the users to see
 function updateDrinkCards() {
     // heading display on call
+    $('#recommendation-heading').empty();
     $('#recommendation-heading').append(`<p class="title" id="awesomeRec">Our Awesome Recommendations...</p>`);
     // clears existing cards
     $("#drink-card-container").empty();
