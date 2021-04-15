@@ -12,10 +12,10 @@
         <section class="hero is-success is-full-desktop bg-img ">
             <!-- <img src="./Assets/pianoBar.jpeg" alt="speakeasy bar"> -->
             <div class="hero-body ">
-              <p class="title p-2 mt-2">
+              <p class="title p-2 mt-2 ml-4">
                 Drink My Weather
               </p>
-              <p class="subtitle p-2 mt-3">
+              <p class="subtitle ml-6">
                 Not Just For Plants...
               </p>
               <!-- <div class="column is-offset-8">
@@ -26,11 +26,11 @@
         <section>
         <div class="columns bg-img">
             <div class="column is-narrow is-one-third is-three-quarters-mobile is-two-thirds-tablet ml-6 mt-3">
-              <div class="box" style="width: 300px;">
+              <div class="box" style="width: 265px;">
                 <br>
-                <p class="title is-5">Search By Zipcode</p>
+                <p class="title is-5">Search Zipcode</p>
                 <p class="subtitle"><input class="input is-info" id="zipSearchInputField" type="text" maxlength="5" 
-                    value="" required title="Requires 5 digit US ZIP code." placeholder="Zip code.." pattern = "[0-9]{5,5}"></p>
+                    value="" required title="Requires 5 digit US ZIP code." placeholder="Zip code..." pattern = "[0-9]{5,5}"></p>
                 <div class="buttons">
                     <button id="zipSearchBtn" type="submit" class="button is-info">submit</button> 
                     <!-- should 'submit button' be inside the column div? creates shorter container -->
@@ -39,7 +39,7 @@
             <!-- map container to be filled---does it need responsive added? -->
             <div class="columns bg-img">
                 <div class="column is-narrow is-one-third">
-                    <div style="width: 300px;">
+                    <div style="width: 265px;">
                         <div id="weather-card" class="card">
                             
                         </div>
@@ -51,9 +51,9 @@
         <div class="column is-two-thirds bg-img">
             <div class="columns is-full">
                 <div class="column is-three-quarters-mobile is-three-quarters-tablet is-full-desktop ml-6">
-                    <div class="section is-small">
-                        <p class="title" id="awesomeRec">Our Awesome Recommendations...</p>
-                        <p class="subtitle">slogan here</p>
+                    <div class="section is-small mb-2">
+                        <p class="title has-text-centered" id="awesomeRec">Our Awesome Recommendations...</p>
+                        <p class="subtitle"></p>
                     </div>
                 </div>
             </div>
