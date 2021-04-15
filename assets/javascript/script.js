@@ -208,23 +208,39 @@ function getDrinkData() {
             console.log(ourDrinkData);
         })
         
-    }
+    } 
+//    Promise.all(); 
+
+    console.log("i'm updating drink cards")
+   updateDrinkCards();
+   setTimeout(5000, updateDrinkCards)
 }
 
 function startDrinkGathering() {
     
-    if (weather.temp <= 32) {
+    if (weather.temp < 0) { 
+        console.log("i'm cold!")
+        getBrrr();
+    } else if (weather.temp <= 32) {
         console.log("i'm below 32")
         getProhb();
     } else if (weather.temp <= 68){
         console.log("i'm below 68")
         getClear();
     } else if (weather.temp < 100 ) {
-        console.log("i'm above 100")
+        console.log("i'm below 100")
         getOrale();
     } 
 }
 
+function getBrrr(){
+var brrrURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=absinthe', 
+'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=everclear']
+    var urlIndex = Math.floor(Math.random()* brrrURL.length); 
+    console.log(brrrURL[urlIndex])
+    getRandomDrink(brrrURL[urlIndex]);
+
+}
 
 function getProhb() {
 var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
@@ -253,4 +269,56 @@ var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequil
     var urlIndex = Math.floor(Math.random()* oraleURL.length); 
     console.log(oraleURL[urlIndex])
     getRandomDrink(oraleURL[urlIndex]);
+} 
+
+function updateDrinkCards() {
+   $("#drink-card-container").empty();
+   
+    var ingList = "";
+
+    console.log(ourDrinkData) 
+    // for (let q = 0; q < ourDrinkData.drinkIngredients.length; q++){
+    //     ingList += `<li>${ourDrinkData.drinkMeasurements[q]}${ourDrinkData.drinkIngredients[q]}</li>`;
+    // }
+
+    for (let m = 0; m < 3; m++){
+        console.log("help me here", m, ourDrinkData[m].drinkName);
+        for (let q = 0; q < ourDrinkData[m].drinkIngredients.length; q++){
+            console.log("i'm in the second loop", m, ourDrinkData[m].drinkName);
+            ingList += `<li>${ourDrinkData[m].drinkMeasurements[q]}${ourDrinkData[m].drinkIngredients[q]}</li>`;
+            console.log(ingList, "after update of ing list");
+        }
+        $("#drink-card-container").append(`<div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">` +
+                                          `<div class="card-image box "><figure class="image is-2by2">`+
+                                          `<img src="${ourDrinkData[m].drinkImg}"><div class="content">`+
+                                          `<h2>${ourDrinkData[m].drinkName}</h2><ol type="i">${ingList}</ol>`+
+                                          `<h6>How to make: </h6><p>${ourDrinkData[m].drinkInstruction}</p>`+ 
+                                          `</div></figure></div></div>`)
+    }
 }
+
+
+
+
+
+
+
+
+/* <div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">
+<div class="card-image box ">
+    <figure class="image is-2by2">
+      <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
+        <div class="content">
+                <h2> Drink Title </h2>
+            <ol type="i">
+                <li>Measure/Ingredients</li>
+                <li>Measure/Ingredients</li>
+                <li>Measure/Ingredients</li>
+                <li>Measure/Ingredients</li>
+            </ol>
+                <h6>Instructions</h6>
+                <p>Here is the Instructions for the Drink</p>
+        </div>
+    </figure>    
+</div>    
+</div> */
