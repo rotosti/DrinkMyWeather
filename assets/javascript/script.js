@@ -181,54 +181,53 @@ function getDrinkData() {
 }
 
 // start jj code
-var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
-'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
-
-function getRandomNeat() {
-    return neat[Math.floor(Math.random() * neat.length)]; 
-} 
-
-console.log(getRandomNeat())
-var neatURL = []
+// function getNeat(){
+//     var neat = ['Siembra Valles 92 proof Blanco Tequila','NY Distilling Ragtime Rye',
+//     'Del Maguey Mezcal','Hakushu 18-Year Whiskey','Christian Drouin Calvados','Santa Teresa 1796 Solera Rum', 'Jeppson Malört'];
 
 
+//     return neat[Math.floor(Math.random() * neat.length)]; 
+
+//     console.log(getRandomNeat())
+//     var neatURL = []
+
+// }
+function getProhb() {
 var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=whiskey'];
 
-for (var i = 0; i < proURL.length; i++) {
-    fetch(proURL[i])
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data)
-    }) 
-} 
+    var urlIndex = Math.floor(Math.random()* proURL.length); 
+    console.log(proURL[urlIndex])
+    getRandomDrink(proURL[urlIndex]);
+}
 
-
+function getClear() { 
 var clearURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=gin',
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=vodka'];
 
-for (var i = 0; i < clearURL.length; i++) {
-    fetch(clearURL[i])
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data)
-    }) 
+    var urlIndex = Math.floor(Math.random()* clearURL.length); 
+    console.log(clearURL[urlIndex])
+    getRandomDrink(clearURL[urlIndex]);
+    
 } 
 
+   
+function getOrale() {
 var oraleURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=tequila',
 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum'];
 
-for (var i = 0; i < oraleURL.length; i++) {
-    fetch(oraleURL[i])
-    .then(function(response){
-        return response.json();
-    })
-    .then(function(data){
-        console.log(data)
-    }) 
-} 
+    var urlIndex = Math.floor(Math.random()* oraleURL.length); 
+    console.log(oraleURL[urlIndex])
+    getRandomDrink(oraleURL[urlIndex]);
 
+
+
+if (weather.temp <= 32 {
+     drinkData.push()
+ } else if (weather.temp <= 68){
+
+ } else if (weather.temp < 100 ) {
+
+ } else {
+
+}
