@@ -5,27 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/reset.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css"> 
     <title>Drink My Weather</title>
 </head>
-<body>
-        <section class="hero is-small is-success">
-            <div class="hero-body">
-              <p class="title">
+<body >
+        <section class="hero is-success is-full-desktop bg-img ">
+            <!-- <img src="./Assets/pianoBar.jpeg" alt="speakeasy bar"> -->
+            <div class="hero-body ">
+              <p class="title p-2 mt-2">
                 Drink My Weather
               </p>
-              <p class="subtitle">
+              <p class="subtitle p-2 mt-3">
                 Not Just For Plants...
               </p>
-              <div class="column is-offset-8">
+              <!-- <div class="column is-offset-8">
                   <p>Subscribe For a Weekly Special:<input class="input is-normal" type="email" placeholder="Drink Responsibly, Enter Email"></p><button class="button is-warning">Submit</button>
-              </div>
+              </div> -->
             </div>
           </section>
         <section>
-        <div class="columns">
-            <div class="column is-narrow is-one-third is-three-quarters-mobile is-two-thirds-tablet">
+        <div class="columns bg-img">
+            <div class="column is-narrow is-one-third is-three-quarters-mobile is-two-thirds-tablet ml-6 mt-3">
               <div class="box" style="width: 300px;">
                 <br>
                 <p class="title is-5">Search By Zipcode</p>
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <!-- map container to be filled---does it need responsive added? -->
-            <div class="columns">
+            <div class="columns bg-img">
                 <div class="column is-narrow is-one-third">
                     <div style="width: 300px;">
                         <div id="weather-card" class="card">
@@ -48,89 +48,70 @@
             </div>
         </div>
         <!-- modify to match wireframe -->
-        <div class="column is-two-thirds">
-            <div class="columns is-centered is-full">
-                <div class="column is-three-quarters-mobile is-two-thirds-tablet is-full-desktop">
+        <div class="column is-two-thirds bg-img">
+            <div class="columns is-full">
+                <div class="column is-three-quarters-mobile is-three-quarters-tablet is-full-desktop ml-6">
                     <div class="section is-small">
-                        <p class="title">Our Awesome Recommendations...</p>
-                        <p class="subtitle">This column will take up the remaining space available.</p>
+                        <p class="title" id="awesomeRec">Our Awesome Recommendations...</p>
+                        <p class="subtitle">slogan here</p>
                     </div>
                 </div>
             </div>
             <br>
             <br>
             <!-- IMG  -->
-            <div class="columns is-full">
-                <div class="column is-three-quarters-mobile is-3">
-                    <div class="card-image">
+            <div class="columns is-full is-multiline bg-img">
+                <div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">
+                    <div class="card-image box ">
                         <figure class="image is-2by2">
                           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
                             <div class="content">
-                                <h2>Whisky Sour</h2>
-                                <h6>Mix Ingredients</h6>
+                                    <h2> Drink Title </h2>
                                 <ol type="i">
-                                    <li>Limes</li>
-                                    <li>Orange Peel</li>
-                                    <li>Whisky</li>
-                                    <li>Milk</li>
-                                    <li>ice tea</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
                                 </ol>
-                                <h6>Recipe</h6>
-                                <ol type="1">
-                                    <li>Coffee</li>
-                                    <li>Tea</li>
-                                    <li>Vermouth</li>
-                                    <li>Absinthe</li>
-                                </ol>
+                                    <h6>Instructions</h6>
+                                    <p>Here is the Instructions for the Drink</p>
                             </div>
                         </figure>    
                     </div>    
                 </div>
-                <div class="column is-three-quarters-mobile is-two-thirds-tablet is-3">
-                    <div class="card-image">
+                <div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6">
+                    <div class="card-image box">
                         <figure class="image is-2by2">
                           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
-                            <div class="content">
-                            <h2>Old Fashion'd </h2>
-                            <h6>Mix Ingredients</h6>
-                            <ol type="i">
-                                <li>Coffee</li>
-                                <li>Tea</li>
-                                <li>Vermouth</li>
-                                <li>Absinthe</li>
-                            </ol>
-                            <h6>Recipe</h6>
-                                <ol type="1">
-                                    <li>Coffee</li>
-                                    <li>Tea</li>
-                                    <li>Vermouth</li>
-                                    <li>Absinthe</li>
+                                <div class="content">
+                                    <h2>Title </h2>
+                                <ol type="i">
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
                                 </ol>
-
-                            </div>
+                                    <h6>Instructions</h6>
+                                    <p>Here is the Instructions for the Drink</p>
+                                </div>
                         </figure>    
                     </div>
                 </div>
-                <div class="column is-three-quarters-mobile is-two-thirds-tablet is-3">
-                    <div class="card-image">
+                <div class="column is-three-quarters-mobile is-three-quarters-tablet is-5-desktop ml-6 mb-6">
+                    <div class="card-image box">
                         <figure class="image is-2by2">
                           <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">    
                             <div class="content">
-                                <h2>Żubrówka</h2>
-                                <h6>Mix Ingredients</h6>
+                                    <h2>Title </h2>
                                 <ol type="i">
-                                    <li>Vodka</li>
-                                    <li>Agave extract</li>
-                                    <li>ripe beets</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
+                                    <li>Measure/Ingredients</li>
                                 </ol>
-                                <h6>Recipe</h6>
-                                <ol type="1">
-                                    <li>Coffee</li>
-                                    <li>Tea</li>
-                                    <li>Vermouth</li>
-                                    <li>Absinthe</li>
-                                </ol>
-
+                                    <h6>Instructions</h6>
+                                    <p>Here is the Instructions for the Drink</p>
+                                </div>
                             </div>
                         </figure>    
                     </div>
