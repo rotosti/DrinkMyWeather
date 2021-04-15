@@ -19,6 +19,8 @@ var weather = {
     currentConditions: ""
 }
 
+var displayDrinks = [];
+
 function getWeatherData() {
 
     var zipCode = zipSearchTxt.val();
@@ -104,6 +106,7 @@ function getRandomNeat() {
 } 
 
 console.log(getRandomNeat())
+var neatURL = []
 
 
 var proURL = ['https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=bourbon', 
