@@ -1,0 +1,27 @@
+.bg-img { 
+    background-image: url('../pianoBar.jpeg');
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+    background-color: #999;
+}
+
+#awesomeRec {
+    color: white;    
+
+}
+
+/* 
+.hero
+  &.has-background
+    position: relative
+    overflow: hidden
+  &-background
+    position: absolute
+    object-fit: cover
+    object-position: center center
+    width: 100%
+    height: 100%
+    &.is-transparent
+      opacity: 0.3 */
