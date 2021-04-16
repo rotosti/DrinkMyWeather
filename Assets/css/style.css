@@ -4,12 +4,15 @@
     background-repeat:  no-repeat;
     background-attachment: fixed;
     background-size:  cover;
-    background-color: #999;
+    min-height: 100vh;
+    height: 100%;
+    width: 100vw;
 }
-/* .hero-body {
-  background-color: chartreuse;
 
-} */
+.hero-body {
+  background-color: rgb(90, 16, 20);
+
+}
 
 
 #awesomeRec {
