@@ -15,4 +15,4 @@ Once the logic has decided what 'type' of adult beverages to recommend, it will 
 
 Once the data is collected, the information will be displayed to the user on the web app.  The web app will display the weather conditions and 3 adult beverage recommendations with images, names, ingredients, and instructions on how to make the beverage.
 
-![](./Assets/DWM-Screen.png)
+![](../DWM-Screen.png)
