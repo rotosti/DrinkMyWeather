@@ -3,6 +3,7 @@ An app which recommends adult beverages based on weather.
 
 Authors: JJ Espinoza, Jason Carrazco, Tom Siemion
 Project: Drink My Weather
+LINK: https://rotosti.github.io/DrinkMyWeather/
 
 The application is designed to take in a US based zip code, provide weather information and provide adult beverage recommendations based on the current weather conditions.
 
